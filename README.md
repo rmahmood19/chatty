@@ -97,7 +97,7 @@ The application uses **Laravel Echo** with **Pusher** for real-time functionalit
 ### Frontend
 - **Vue 3** - JavaScript framework
 - **Vue Router** - Client-side routing
-- **Pinia** - State management
+- **Vuex** - State management
 - **Axios** - HTTP client
 - **Laravel Echo** - Real-time client
 

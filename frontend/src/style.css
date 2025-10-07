@@ -1,1 +1,15 @@
 @import "tailwindcss";
+@layer utilities {
+    .autofill-dark:-webkit-autofill,
+    .autofill-dark:-webkit-autofill:hover,
+    .autofill-dark:-webkit-autofill:focus {
+        -webkit-text-fill-color: #fff;
+        caret-color: #fff;
+        box-shadow: 0 0 0 1000px #000 inset !important; /* dark bg */
+    }
+    /* Firefox */
+    .autofill-dark:-moz-autofill {
+        box-shadow: 0 0 0 1000px #000 inset !important;
+        -moz-text-fill-color: #fff;
+    }
+}

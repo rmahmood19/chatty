@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unique(['dm_first_user_id', 'dm_second_user_id']);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

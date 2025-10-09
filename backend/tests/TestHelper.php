@@ -10,7 +10,4 @@ trait TestHelper
     {
         return User::factory()->create($attributes);
     }
-
-
-
 }

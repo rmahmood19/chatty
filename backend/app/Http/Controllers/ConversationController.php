@@ -32,6 +32,8 @@ class ConversationController extends Controller
             'dm_second_user_id' => $userTwoId,
         ]);
 
+        $conversation->users()->attach([$userOneId, $userTwoId]);
+
         return response()->json($conversation);
 
     }

@@ -23,10 +23,23 @@ class ConversationControllerTest extends TestCase
 
         $response->assertStatus(200);
 
+        $conversation = Conversation::find($response->json('id'));
+
+        $usersInConversation = $conversation->users->pluck('id');
+
+        $this->assertTrue($usersInConversation->contains($user1->id));
+        $this->assertTrue($usersInConversation->contains($user2->id));
+
         $this->assertDatabaseHas('conversations', [
             'dm_first_user_id' => $user1->id,
             'dm_second_user_id' => $user2->id,
         ]);
+
+        $user1->refresh();
+        $user2->refresh();
+
+        $this->assertCount(1, $user1->conversations);
+        $this->assertCount(1, $user2->conversations);
     }
 
     #[Test]
@@ -73,7 +86,4 @@ class ConversationControllerTest extends TestCase
 
         $this->assertEquals(1, $count);
     }
-
-
-
 }

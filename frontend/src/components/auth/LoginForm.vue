@@ -93,7 +93,7 @@
 
 <script>
 import { ref, reactive } from 'vue'
-import { authService } from '../services/auth'
+import { authService } from '@/services/auth.js'
 
 export default {
   name: 'LoginForm',
@@ -104,6 +104,14 @@ export default {
     const form = reactive({
       email: '',
       password: ''
+    })
+
+    const registerForm = reactive({
+      name: '',
+      display_name: '',
+      email: '',
+      password: '',
+      password_confirmation: ''
     })
     
     // Component state

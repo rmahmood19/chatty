@@ -15,7 +15,6 @@ const api = axios.create({
 function getXSRFToken() {
   const name = 'XSRF-TOKEN'
   const cookies = document.cookie.split(';')
-    console.log(cookies)
 
   for (let cookie of cookies) {
     const [cookieName, cookieValue] = cookie.trim().split('=')

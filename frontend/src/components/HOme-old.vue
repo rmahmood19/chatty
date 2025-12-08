@@ -174,7 +174,7 @@
                     </li>
                 </ul>
 
-                <div class="my-4 h-px bg-zinc-200 dark:bg-zinc-700 group-data-[collapsed=true]:mx-3" />
+                <div class="my-4 h-px bg-zinc-200 group-data-[collapsed=true]:mx-3" />
                 <div class="px-3 py-2 text-xs text-zinc-500 dark:text-zinc-400 hidden group-data-[collapsed=true]:md:block">
                     Collapsed
                 </div>
@@ -182,9 +182,9 @@
         </aside>
 
         <!-- Main content -->
-        <main :class="['flex-1 md:transition-[margin] duration-300 ease-out', collapsed ? 'md:ml-20' : 'md:ml-64']">
+        <main :class="['flex-1 md:transition-[margin] duration-300 ease-out']">
             <!-- Top bar -->
-            <header class="sticky top-0 z-20 h-16 bg-white/80 dark:bg-zinc-900/80 backdrop-blur border-b border-zinc-200 dark:border-zinc-800 flex items-center px-4 md:px-6">
+            <header class="sticky top-0 z-20 h-16  backdrop-blur border-b border-zinc-200 dark:border-zinc-800 flex items-center px-4 md:px-6">
                 <!-- Mobile hamburger -->
                 <button
                     class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-xl border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -208,24 +208,7 @@
                     </button>
                 </div>
             </header>
-
-            <!-- Content -->
-            <section class="px-4 md:px-6 py-6 space-y-6">
-                <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                    <article class="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white dark:bg-zinc-900 shadow-sm">
-                        <h2 class="font-semibold mb-2">Welcome</h2>
-                        <p class="text-sm text-zinc-600 dark:text-zinc-400">Try collapsing the sidebar with the top-left button or press <kbd>Ctrl/Cmd + B</kbd>.</p>
-                    </article>
-                    <article class="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white dark:bg-zinc-900 shadow-sm">
-                        <h2 class="font-semibold mb-2">Responsive</h2>
-                        <p class="text-sm text-zinc-600 dark:text-zinc-400">On mobile, the sidebar slides in with an overlay. Press <kbd>Esc</kbd> to close.</p>
-                    </article>
-                    <article class="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white dark:bg-zinc-900 shadow-sm">
-                        <h2 class="font-semibold mb-2">Persisted</h2>
-                        <p class="text-sm text-zinc-600 dark:text-zinc-400">Collapse state is saved in <code>localStorage</code>.</p>
-                    </article>
-                </div>
-            </section>
+          <user-list/>
         </main>
     </div>
 </template>
@@ -233,6 +216,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import UserList from "@/components/UserList.vue";
 
 const collapsed = ref(false)
 const mobileOpen = ref(false)

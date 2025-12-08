@@ -19,6 +19,7 @@
     "axios": "^1.11.0",
     "tailwindcss": "^4.1.13",
     "vue": "^3.5.18",
+    "vue-router": "^4.6.3",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

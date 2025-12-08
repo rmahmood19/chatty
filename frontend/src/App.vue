@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import LoginForm from './components/auth/LoginForm.vue'
-import Home from "@/components/Home.vue";
+import HOmeOld from "@/components/HOme-old.vue";
 
 // Application state
 const user = ref(null)
@@ -10,8 +10,6 @@ const showRegister = ref(false)
 // Handle successful login
 const handleLoginSuccess = (data) => {
   user.value = data.user
-  console.log('User logged in:', data.user)
-  console.log(data.message)
 }
 
 // Handle register switch
@@ -30,16 +28,22 @@ const handleLogout = () => {
 
 <template>
   <div>
-    <!-- Show Login Form if user is not logged in -->
-    <LoginForm 
-      v-if="!user" 
-      @login-success="handleLoginSuccess"
-      @switch-to-register="switchToRegister"
-    />
-    
-    <!-- Show Chat Interface if user is logged in -->
-    <div v-else>
-        <Home user=user @logout="handleLogout" />
-    </div>
+      <router-view></router-view>
+<!--    &lt;!&ndash; Show Login Form if user is not logged in &ndash;&gt;-->
+<!--    <LoginForm -->
+<!--      v-if="!user" -->
+<!--      @login-success="handleLoginSuccess"-->
+<!--      @switch-to-register="switchToRegister"-->
+<!--    />-->
+<!--    -->
+<!--    &lt;!&ndash; Show Chat Interface if user is logged in &ndash;&gt;-->
+<!--    <div v-else>-->
+<!--        <HOmeOld user=user @logout="handleLogout" />-->
+<!--    </div>-->
   </div>
 </template>
+<style>
+body {
+    color: #ededec;
+}
+</style>

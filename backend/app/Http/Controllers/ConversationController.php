@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ConversationType;
 use App\Http\Requests\ConversationRequest;
 use App\Models\Conversation;
+use Illuminate\Http\Request;
 
 class ConversationController extends Controller
 {
@@ -27,7 +28,7 @@ class ConversationController extends Controller
 
         $conversation = Conversation::firstOrCreate([
             'type' => ConversationType::PRIVATE,
-            'creator_id' =>  $request->user()->id,
+            'creator_id' => $request->user()->id,
             'dm_first_user_id' => $userOneId,
             'dm_second_user_id' => $userTwoId,
         ]);
@@ -35,6 +36,25 @@ class ConversationController extends Controller
         $conversation->users()->attach([$userOneId, $userTwoId]);
 
         return response()->json($conversation);
+    }
+
+    public function messages(Conversation $conversation)
+    {
+        $messages = $conversation->messages()->with('sender')->get();
+
+        return response()->json($messages);
+    }
+
+    public function storeMessage(Request $request, Conversation $conversation)
+    {
+        $content = $request->input('content');
+
+        $conversation->messages()->create([
+            'sender_id' => auth()->id(),
+            'content' => $content,
+        ]);
+
+        return response()->json(['message' => 'Message saved']);
 
     }
 }

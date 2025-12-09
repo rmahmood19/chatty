@@ -1,3 +1,3 @@
-import api from "@/services/api.js";
+import apiService from "@/services/apiService.js";
 
 export const conversationService = {}

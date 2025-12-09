@@ -1,15 +1,33 @@
 <script setup>
 
 import {ref} from "vue";
+import { authService } from "@/services/authService";
+import {useRouter} from "vue-router";
+import useAuthStore from "@/stores/authStore.js";
+
 
 const form = ref({
     email: '',
     password: ''
 })
 
-const handleLogin = () => {
-    // Placeholder for login logic
-    console.log("Logging in with", form.value);
+const auth = useAuthStore();
+
+const router = useRouter();
+
+const handleLogin = async () => {
+    loading.value = true;
+    error.value = '';
+    validationErrors.value = [];
+
+    await auth.login(form.value.email, form.value.password)
+
+    console.log(auth.user)
+
+    if (auth.user) {
+        loading.value = false;
+        await router.push('/')
+    }
 }
 
 const loading = ref(false);

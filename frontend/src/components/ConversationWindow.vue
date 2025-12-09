@@ -1,7 +1,7 @@
 <script setup>
 
 import {computed, onMounted, ref} from "vue";
-import api from "@/services/api.js";
+import apiService from "@/services/apiService.js";
 
 const messages = ref([])
 // ...
@@ -16,7 +16,7 @@ const props = defineProps({
 
 onMounted(() => {
 
-  api.get(`/api/conversations/${props.conversation.id}/messages`)
+  apiService.get(`/api/conversations/${props.conversation.id}/messages`)
       .then((response) => {
         messages.value = response.data
 
@@ -36,7 +36,7 @@ const handleMessageSend = (event) => {
   }
 
   // Send the message to the server
-  api.post(`/api/conversations/${props.conversation.id}/messages`, {
+  apiService.post(`/api/conversations/${props.conversation.id}/messages`, {
     content: messageContent
   }).then((response) => {
     // Clear the input field

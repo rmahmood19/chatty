@@ -1,15 +1,18 @@
 <script setup>
 
 import {Dialog, DialogPanel, TransitionChild, TransitionRoot} from "@headlessui/vue";
-import UserList from "@/components/UserList.vue";
 
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import {useRouter} from "vue-router";
+import authStore from "@/stores/authStore.js";
 
 const collapsed = ref(false)
 const mobileOpen = ref(false)
 const md = 768 // Tailwind 'md'
 
-const user = defineProps(['user'])
+const user = ref(null)
+
+const router = useRouter();
 
 function applyCollapsed(v) {
     collapsed.value = v
@@ -33,6 +36,12 @@ function onKeydown(e) {
     if (e.key === 'Escape' && window.innerWidth < md) {
         mobileOpen.value = false
     }
+}
+
+const handleLogout = async () =>  {
+    await authStore().logout()
+
+    await router.push('/login')
 }
 
 onMounted(() => {
@@ -237,11 +246,10 @@ onBeforeUnmount(() => {
                     </svg>
                 </button>
 
-                
                 <div class="ml-auto flex items-center gap-2">
                     <button
-                        @click="$emit('logout')"
-                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200"
+                        @click="handleLogout"
+                        class="border border-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition duration-200"
                     >
                         Logout
                     </button>

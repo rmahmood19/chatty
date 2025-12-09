@@ -1,10 +1,14 @@
-import api from "@/services/api.js";
+import apiService from "@/services/apiService.js";
 
 export const userService = {
 
-    async users() {
-        const response = await api.get('/api/users');
+    async getUsers() {
+        const response = await apiService.get('/users');
+        return response.data;
+    },
+
+    async getLoggedInUser() {
+        const response = await apiService.get('/user');
         return response.data;
     }
-
 }

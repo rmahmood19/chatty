@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted, ref, shallowRef} from "vue";
 import {userService} from "@/services/userService.js";
-import api from "@/services/api.js";
+import apiService from "@/services/apiService.js";
 import ConversationWindow from "@/components/ConversationWindow.vue";
 
 const users = ref([])
@@ -15,7 +15,7 @@ onMounted(async () => {
 })
 
 const startConversation = (id) => {
-  api.post('/api/conversations',
+  apiService.post('/api/conversations',
       {
         user_id: id
       }

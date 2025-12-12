@@ -6,6 +6,7 @@ use App\Enums\ConversationType;
 use App\Events\ConversationMessageReceived;
 use App\Http\Requests\ConversationRequest;
 use App\Http\Resources\Conversation\ConversationListResource;
+use App\Http\Resources\Conversation\ConversationResource;
 use App\Models\Conversation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,5 +64,14 @@ class ConversationController extends Controller
         broadcast(new ConversationMessageReceived($message));
 
         return response()->json(['message' => 'Message saved']);
+    }
+
+    public function show(Request $request, Conversation $conversation)
+    {
+        $conversation->load([
+            'messages.sender',
+            'users'
+        ]);
+        return new ConversationResource($conversation);
     }
 }

@@ -21,6 +21,9 @@ namespace App\Models{
  * @property int|null $dm_second_user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Message> $messages
+ * @property-read int|null $messages_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Conversation newModelQuery()
@@ -29,6 +32,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Conversation query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Conversation whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Conversation whereCreatorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Conversation whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Conversation whereDmFirstUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Conversation whereDmSecondUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Conversation whereId($value)
@@ -41,6 +45,31 @@ namespace App\Models{
  */
 	#[\AllowDynamicProperties]
 	class IdeHelperConversation {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $conversation_id
+ * @property int $sender_id
+ * @property string $content
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Conversation $conversation
+ * @property-read \App\Models\User $sender
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Message newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Message newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Message query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Message whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Message whereConversationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Message whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Message whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Message whereSenderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Message whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperMessage {}
 }
 
 namespace App\Models{

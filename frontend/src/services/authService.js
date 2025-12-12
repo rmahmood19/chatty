@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 // Create axios instance
-const authClient = axios.create({
+export const authClient = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL, // Use VITE_API_URL for consistency
   withCredentials: true,
   withXSRFToken:true,

@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ConversationType;
+use App\Events\ConversationMessageReceived;
 use App\Http\Requests\ConversationRequest;
+use App\Http\Resources\Conversation\ConversationListResource;
 use App\Models\Conversation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConversationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $user = Auth::user();
+        $conversations = $user->conversations()->with('users')->get();
 
+        return ConversationListResource::collection($conversations);
     }
 
     public function store(ConversationRequest $request)
@@ -49,12 +55,13 @@ class ConversationController extends Controller
     {
         $content = $request->input('content');
 
-        $conversation->messages()->create([
+        $message = $conversation->messages()->create([
             'sender_id' => auth()->id(),
             'content' => $content,
         ]);
 
-        return response()->json(['message' => 'Message saved']);
+        broadcast(new ConversationMessageReceived($message));
 
+        return response()->json(['message' => 'Message saved']);
     }
 }

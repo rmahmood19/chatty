@@ -17,17 +17,27 @@ const routes = [
             {
                 path: '',
                 name: 'Dashboard',
-                component: () => import('@/views/Dashboard.vue')
+                redirect: { name: 'Conversations' },
             },
             {
-                path: '/users',
+                path: 'conversations',
+                name: 'Conversations',
+                component: () => import('@/views/ConversationList.vue'),
+
+            },
+            {
+                path: 'conversations/:id',
+                name: 'ConversationDetail',
+                component: () => import('@/views/ConversationDetail.vue'),
+                props: true,
+            },
+            {
+                path: 'users',
                 name: 'Users',
                 component: () => import('@/views/UserList.vue')
             }
         ]
-
     },
-
 ]
 
 const router = createRouter({

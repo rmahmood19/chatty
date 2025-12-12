@@ -196,7 +196,7 @@ onBeforeUnmount(() => {
                   <path d="M5 10v10h14V10" stroke-linecap="round"/>
                 </svg>
               </span>
-                            <span class="truncate group-data-[collapsed=true]:hidden md:inline">Messages</span>
+                            <span class="truncate group-data-[collapsed=true]:hidden md:inline">Conversations</span>
                         </RouterLink>
                     </li>
                     <li>

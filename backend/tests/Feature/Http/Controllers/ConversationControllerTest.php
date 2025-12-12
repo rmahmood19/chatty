@@ -2,12 +2,34 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Enums\ConversationType;
 use App\Models\Conversation;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class ConversationControllerTest extends TestCase
 {
+
+    #[Test]
+    public function user_can_list_all_their_conversation()
+    {
+        $user1 = $this->createUser();
+        $user2 = $this->createUser();
+        $user3 = $this->createUser();
+
+        $conversation1 = $this->createConversation($user1, $user2);
+        $conversation2 = $this->createConversation($user1, $user3);
+
+        $this->actingAs($user1);
+
+        $response = $this->getJson(route('conversations.index'));
+
+        $response->assertStatus(200);
+
+        //TODO: Improve this test to check the actual data returned
+
+    }
+
     #[Test]
     public function user_can_create_a_conversation_with_another_user()
     {
